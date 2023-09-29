@@ -1,5 +1,6 @@
 ﻿
 <#
+############ Basic commands ##############
 generate ssh: ssh-keygen -o -t rsa -b 4096
 get key: cat ~/.ssh/id_rsa.pub
 #>
