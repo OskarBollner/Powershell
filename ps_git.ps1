@@ -46,17 +46,28 @@ function Restart-PowerShell
     ## Displays current logged in git account ##
 function git_account
 {   
-    Write-Host "You are currently logged in as: " -Foregroundcolor blue
-    git config --global user.email
+    Write-Host "You are currently logged in as: " -Foregroundcolor cyan
     git config --global user.name
+    git config --global user.email
 }
 
     ## Login to different git account ##
 function git_login
 {
     $name = $(Write-Host "Username: " -Foregroundcolor magenta -NoNewLine ;Read-Host)
+    while (-not($name))
+    {
+        Write-Host "Please enter a valid name!" -ForegroundColor red
+        $name = $(Write-Host "Username: " -Foregroundcolor magenta -NoNewLine ;Read-Host)
+    }
     git config --global user.name $name
+
     $email = $(Write-Host "Email: " -Foregroundcolor magenta -NoNewLine ;Read-Host)
+    while (-not($email))
+    {
+        Write-Host "Please enter a valid email!" -ForegroundColor red
+        $email = $(Write-Host "Email: " -Foregroundcolor magenta -NoNewLine ;Read-Host)
+    }
     git config --global user.email $email
 }
     
