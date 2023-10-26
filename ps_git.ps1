@@ -9,25 +9,28 @@ get key: cat ~/.ssh/id_rsa.pub
 
 ## Runs g++ with flags ##
 
-function g++_flags {
+function g++_with_flags 
+{
     g++ -std=c++17 -Wall -Wextra -pedantic -Weffc++ -Wold-style-cast -Woverloaded-virtual -fmax-errors=3 -g $args
-    }
+}
     
     Set-Alias -Name gpp -Value g++_flags
     
     
     ## Reloads Powershell ##
-    function Invoke-PowerShell {
+function Invoke-PowerShell 
+{
         powershell –nologo
         Invoke-PowerShell
-    }
-    
-    function Restart-PowerShell {
+}
+
+function Restart-PowerShell 
+{
         if ($host.Name -eq 'ConsoleHost') {
             exit
         }
         Write-Warning 'Only usable while in the PowerShell console host'
-    }
+}
     
     Set-Alias –Name 'reload' –Value 'Restart-PowerShell'
     
@@ -39,18 +42,23 @@ function g++_flags {
             Invoke-PowerShell
         }
     }
-    
-    
-    ## Displays current git username or change if argument != null ##
-    function gcun {git config --global user.name $args[0]}
-    
-    Set-Alias -Name acc_name -Value gcun
-    
-    
-    ## Displays current git email or change if argument != null ##
-    function gcue {git config --global user.email $args[0]}
-    
-    Set-Alias -Name acc_email -Value gcue
+
+    ## Displays current logged in git account ##
+function git_account
+{   
+    Write-Host "You are currently logged in as: " -Foregroundcolor blue
+    git config --global user.email
+    git config --global user.name
+}
+
+    ## Login to different git account ##
+function git_login
+{
+    $name = $(Write-Host "Username: " -Foregroundcolor magenta -NoNewLine ;Read-Host)
+    git config --global user.name $name
+    $email = $(Write-Host "Email: " -Foregroundcolor magenta -NoNewLine ;Read-Host)
+    git config --global user.email $email
+}
     
     
     ## Imports posh-git ##
