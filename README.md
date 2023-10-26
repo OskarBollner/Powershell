@@ -6,4 +6,4 @@ Implements some handy features for git and powershell. These are the following c
 - git_login: Used to log in to a new git account.
 
 # How to use
-Locate your current powershell profile by typing $Profile.CurrentUserAllHosts in powershell. Then open that profile.ps1 file in your text editor of choice. Paste the contents of ps_git.ps1 in profile.ps1 and that should be all.
+Run edit_profile.ps1 by typing .\edit_profile.ps1 in powershell. This should write all content in ps_git.ps1 to your powershell profile.
