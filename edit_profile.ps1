@@ -1,4 +1,10 @@
 
+# Create Powershell profile
+if (!(Test-Path $PROFILE.CurrentUserAllHosts))
+{
+    New-Item -Path $PROFILE.CurrentUserAllHosts -Type File -Force
+}
+
 # Downloads g++
 if (!(((Get-ItemProperty HKCU:\Environment).PATH).Contains("\msys64\ucrt64\bin")))
 {
