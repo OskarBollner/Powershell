@@ -1,5 +1,6 @@
 
-if (!(Test-Path "c:\temp_msys2\msys2-x86_64-20231026.exe"))
+# Downloads g++
+if (!(((Get-ItemProperty HKCU:\Environment).PATH).Contains("\msys64\ucrt64\bin")))
 {
     # URL to g++ download
     $url = "https://github.com/msys2/msys2-installer/releases/download/2023-10-26/msys2-x86_64-20231026.exe"
@@ -22,5 +23,17 @@ if (!(Test-Path "c:\temp_msys2\msys2-x86_64-20231026.exe"))
     [Environment]::SetEnvironmentVariable("Path", $newPath, "User")
 }
 
+# Downloads Posh-git
+
+If (Test-Path (Get-Module -ListAvailable posh-git).path)
+{
+    # You've already installed a previous version of posh-git from the PowerShell Gallery
+    PowerShellGet\Update-Module posh-git
+}
+else 
+{
+    # You've never installed posh-git from the PowerShell Gallery
+    PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
+}
 
 Set-Content -Path $PROFILE.CurrentUserAllHosts -Value (Get-Content "ps_git.ps1")

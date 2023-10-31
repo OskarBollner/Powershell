@@ -20,7 +20,7 @@ function g++_with_flags
     ## Reloads Powershell ##
 function Invoke-PowerShell 
 {
-        powershell –nologo
+        powershell -nologo
         Invoke-PowerShell
 }
 
@@ -32,14 +32,15 @@ function Restart-PowerShell
         Write-Warning 'Only usable while in the PowerShell console host'
 }
     
-    Set-Alias –Name 'reload' –Value 'Restart-PowerShell'
+    Set-Alias -Name 'reload' -Value 'Restart-PowerShell'
     
-    $parentProcessId = (Get-WmiObject Win32_Process –Filter "ProcessId=$PID").ParentProcessId
-    $parentProcessName = (Get-WmiObject Win32_Process –Filter "ProcessId=$parentProcessId").ProcessName
+    $parentProcessId = (Get-WmiObject Win32_Process -Filter "ProcessId=$PID").ParentProcessId
+    $parentProcessName = (Get-WmiObject Win32_Process -Filter "ProcessId=$parentProcessId").ProcessName
     
     if ($host.Name -eq 'ConsoleHost') {
         if (-not($parentProcessName -eq 'powershell.exe')) {
             Invoke-PowerShell
+            Set-Location $current_location
         }
     }
 
