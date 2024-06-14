@@ -52,24 +52,26 @@ function git_account
     git config --global user.email
 }
 
-    ## Login to different git account ##
+## Login to different git account ##
 function git_login
 {
-    $name = $(Write-Host "Username: " -Foregroundcolor magenta -NoNewLine ;Read-Host)
-    while (-not($name))
-    {
-        Write-Host "Please enter a valid name!" -ForegroundColor red
+    Write-Host "Username and Email will be set when both have been entered. ( exit with Ctrl+c )" -ForegroundColor white
         $name = $(Write-Host "Username: " -Foregroundcolor magenta -NoNewLine ;Read-Host)
-    }
-    git config --global user.name $name
+        while (-not($name))
+        {
+            Write-Host "Please enter a valid name!" -ForegroundColor red
+            $name = $(Write-Host "Username: " -Foregroundcolor magenta -NoNewLine ;Read-Host)
+        }
 
-    $email = $(Write-Host "Email: " -Foregroundcolor magenta -NoNewLine ;Read-Host)
-    while (-not($email))
-    {
-        Write-Host "Please enter a valid email!" -ForegroundColor red
         $email = $(Write-Host "Email: " -Foregroundcolor magenta -NoNewLine ;Read-Host)
-    }
-    git config --global user.email $email
+        while (-not($email))
+        {
+            Write-Host "Please enter a valid email!" -ForegroundColor red
+            $email = $(Write-Host "Email: " -Foregroundcolor magenta -NoNewLine ;Read-Host)
+        }
+
+        git config --global user.name $name
+        git config --global user.email $email
 }
     
     
